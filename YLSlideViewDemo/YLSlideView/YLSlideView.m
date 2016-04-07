@@ -26,7 +26,7 @@
 @implementation YLSlideView
 
 - (instancetype)initWithFrame:(CGRect)frame forTitles:(NSArray *)titles{
-
+    
     self = [super initWithFrame:frame];
     
     if (self) {
@@ -42,24 +42,24 @@
                   context:nil];
         
     }
-
+    
     return self;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
-
+    
     if ([keyPath isEqualToString:@"delegate"]) {
         [self reloadData];
     }
 }
 - (void)dealloc{
     [self removeObserver:self forKeyPath:@"delegate"];
-   
+    
 }
 #pragma mark RecycledCell
 
 - (void)slideViewRecycle{
-
+    
 #warning 此处是重新的写法，默认是加载两个view。如果想加载一个view 可在次修改
     CGRect mainScrollViewBounds = _mainScrollview.bounds;
     
@@ -74,7 +74,7 @@
     for (YLSlideCell * cell  in _visibleCells) {
         
         if (cell.index < currentPage || cell.index > nextPage) {
-
+            
             //保存偏移量
             [[YGPCache sharedCache]setDataToMemoryWithData:[NSStringFromCGPoint(cell.contentOffset) dataUsingEncoding:NSUTF8StringEncoding] forKey:[@(cell.index) stringValue]];
             
@@ -84,15 +84,15 @@
             
         }
     }
-   
+    
     [_visibleCells minusSet:_recycledCells];
     
     // 添加重用Cell
     for (NSUInteger index = currentPage ; index <= nextPage; index++) {
         
         if (![self isVisibleCellForIndex:index]) {
-        
-           YLSlideCell *cell = [_delegate slideView:self cellForRowAtIndex:index];
+            
+            YLSlideCell *cell = [_delegate slideView:self cellForRowAtIndex:index];
             [self configCellWithCell:cell forIndex:index];
             
             [_visibleCells addObject:cell];
@@ -102,7 +102,7 @@
 }
 
 - (YLSlideCell*)dequeueReusableCell{
-
+    
     YLSlideCell * cell = [_recycledCells anyObject];
     
     if (cell) {
@@ -113,7 +113,7 @@
 }
 
 - (BOOL)isVisibleCellForIndex:(NSUInteger)index{
-
+    
     BOOL isVisibleCell = NO;
     
     for (YLSlideCell * cell in _visibleCells) {
@@ -128,7 +128,7 @@
 }
 
 - (YLSlideCell*)visibleCellForIndex:(NSUInteger)index{
-
+    
     YLSlideCell * visibleCell = nil;
     
     for (YLSlideCell * cell in _visibleCells) {
@@ -156,7 +156,7 @@
     }
     
     //获取偏移量
-   __block YLSlideCell *newCell = cell;
+    __block YLSlideCell *newCell = cell;
     [[YGPCache sharedCache] dataForKey:[@(cell.index) stringValue] block:^(NSData *data, NSString *key) {
         
         if (data) {
@@ -170,7 +170,7 @@
 #pragma make reloadData
 
 - (void)reloadData{
-
+    
     [_visibleCells  removeAllObjects];
     [_recycledCells removeAllObjects];
     
@@ -180,26 +180,26 @@
     
     if ([_delegate respondsToSelector:@selector(columnNumber)]) {
         
-            if (weakSelf) {
-                
-                __STRONG_SELF_YLSLIDE
-                
-                _totaiPageNumber = [strongSelf->_delegate columnNumber];
-
-                [strongSelf.mainScrollview setContentSize:CGSizeMake(CGRectGetWidth(strongSelf.frame)*_totaiPageNumber, CGRectGetHeight(strongSelf.frame)-YLSildeTitleViewHeight)];
-                
-            }
+        if (weakSelf) {
+            
+            __STRONG_SELF_YLSLIDE
+            
+            _totaiPageNumber = [strongSelf->_delegate columnNumber];
+            
+            [strongSelf.mainScrollview setContentSize:CGSizeMake(CGRectGetWidth(strongSelf.frame)*_totaiPageNumber, CGRectGetHeight(strongSelf.frame)-YLSildeTitleViewHeight)];
+            
+        }
     }
-
+    
     [self slideViewRecycle];
     
     [self visibleViewDelegateForIndex:0];
-
-
+    
+    
 }
 
 - (void)visibleViewDelegateForIndex:(NSUInteger)index{
-
+    
     if (_prePageIndex != index) {
         if ([_delegate respondsToSelector:@selector(slideVisibleView:forIndex:)]) {
             [_delegate slideVisibleView:[self visibleCellForIndex:index] forIndex:index];
@@ -207,7 +207,7 @@
     }
     
     _prePageIndex = index;
-
+    
 }
 
 #pragma mark UIScrollView Delegate
@@ -219,7 +219,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     [self slideViewRecycle];
-
+    
     if (!_slideTitleView.isClickTitleButton) {
         if (_slideTitleView.slideTitleViewScrollBlock) {
             _slideTitleView.slideTitleViewScrollBlock(scrollView.contentOffset.x);
@@ -234,7 +234,7 @@
     int currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     
     [self visibleViewDelegateForIndex:currentPage];
-
+    
     if (_slideTitleView.slideViewWillScrollEndBlock) {
         _slideTitleView.slideViewWillScrollEndBlock(scrollView.contentOffset.x);
     }
@@ -261,6 +261,7 @@
     });
     [self addSubview:_mainScrollview];
     
+    
     self.slideTitleView = ({
         
         CGRect slideTitleFrame;
@@ -273,6 +274,7 @@
     });
     [self addSubview:_slideTitleView];
     
+    
     __WEAK_SELF_YLSLIDE
     // slideTitleView 栏目button 点击的监听
     // 滚动到指定的栏目下
@@ -284,7 +286,7 @@
             CGRect frame   = strongSelf.mainScrollview.bounds;
             frame.origin.x = CGRectGetWidth(strongSelf.frame) * index;
             
-            [strongSelf.mainScrollview scrollRectToVisible:frame animated:NO];
+            [strongSelf.mainScrollview scrollRectToVisible:frame animated:YES];
             [strongSelf visibleViewDelegateForIndex:index];
         }
     };
@@ -295,7 +297,10 @@
 - (void)setShowsScrollViewHorizontalScrollIndicator:(BOOL)showsScrollViewHorizontalScrollIndicator{
     
     _mainScrollview.showsHorizontalScrollIndicator = showsScrollViewHorizontalScrollIndicator;
-
 }
 
+- (void)setInitailVisibleYLSCell:(NSInteger)initailVisibleYLSCell{
+    //初始化首先看到的页面
+    _mainScrollview.contentOffset = CGPointMake(SCREEN_WIDTH_YLSLIDE * initailVisibleYLSCell, 0);
+}
 @end
