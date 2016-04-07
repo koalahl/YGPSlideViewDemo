@@ -21,7 +21,7 @@
 		59F2E17B1C20677800D5E078 /* YLSlideViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E17A1C20677800D5E078 /* YLSlideViewDemoTests.m */; };
 		59F2E1861C20677800D5E078 /* YLSlideViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E1851C20677800D5E078 /* YLSlideViewDemoUITests.m */; };
 		59F2E1961C2067DF00D5E078 /* YLSlideTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E1951C2067DF00D5E078 /* YLSlideTitleView.m */; };
-		59F2E19C1C20680D00D5E078 /* YLSlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E19B1C20680D00D5E078 /* YLSlideCell.m */; };
+		59F2E19C1C20680D00D5E078 /* YLSlideTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E19B1C20680D00D5E078 /* YLSlideTableView.m */; };
 		59F2E1A01C20697200D5E078 /* YLSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 59F2E19F1C20697200D5E078 /* YLSlideView.m */; };
 /* End PBXBuildFile section */
 
@@ -70,8 +70,8 @@
 		59F2E1871C20677800D5E078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59F2E1941C2067DF00D5E078 /* YLSlideTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSlideTitleView.h; sourceTree = "<group>"; };
 		59F2E1951C2067DF00D5E078 /* YLSlideTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSlideTitleView.m; sourceTree = "<group>"; };
-		59F2E19A1C20680D00D5E078 /* YLSlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSlideCell.h; sourceTree = "<group>"; };
-		59F2E19B1C20680D00D5E078 /* YLSlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSlideCell.m; sourceTree = "<group>"; };
+		59F2E19A1C20680D00D5E078 /* YLSlideTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSlideTableView.h; sourceTree = "<group>"; };
+		59F2E19B1C20680D00D5E078 /* YLSlideTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSlideTableView.m; sourceTree = "<group>"; };
 		59F2E19D1C20684D00D5E078 /* YLSlideConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLSlideConfig.h; sourceTree = "<group>"; };
 		59F2E19E1C20697200D5E078 /* YLSlideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSlideView.h; sourceTree = "<group>"; };
 		59F2E19F1C20697200D5E078 /* YLSlideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSlideView.m; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 				59F2E19F1C20697200D5E078 /* YLSlideView.m */,
 				59F2E1941C2067DF00D5E078 /* YLSlideTitleView.h */,
 				59F2E1951C2067DF00D5E078 /* YLSlideTitleView.m */,
-				59F2E19A1C20680D00D5E078 /* YLSlideCell.h */,
-				59F2E19B1C20680D00D5E078 /* YLSlideCell.m */,
+				59F2E19A1C20680D00D5E078 /* YLSlideTableView.h */,
+				59F2E19B1C20680D00D5E078 /* YLSlideTableView.m */,
 				59F2E19D1C20684D00D5E078 /* YLSlideConfig.h */,
 			);
 			path = YLSlideView;
@@ -331,7 +331,7 @@
 				59F2E1681C20677800D5E078 /* ViewController.m in Sources */,
 				59F2E1961C2067DF00D5E078 /* YLSlideTitleView.m in Sources */,
 				18B6DDD81C3F52E500153E88 /* YGPCacheMemory.m in Sources */,
-				59F2E19C1C20680D00D5E078 /* YLSlideCell.m in Sources */,
+				59F2E19C1C20680D00D5E078 /* YLSlideTableView.m in Sources */,
 				59F2E1A01C20697200D5E078 /* YLSlideView.m in Sources */,
 				18B6DDD21C3F4F1100153E88 /* YGPCache.m in Sources */,
 				59F2E1651C20677800D5E078 /* AppDelegate.m in Sources */,

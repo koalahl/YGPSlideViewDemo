@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YLSlideConfig.h"
-#import "YLSlideCell.h"
+#import "YLSlideTableView.h"
 
 @class YLSlideView;
 @class YLSlideTitleView;
@@ -36,7 +36,7 @@
  *
  *  @return Cell
  */
-- (YLSlideCell *)slideView:(YLSlideView *)slideView
+- (YLSlideTableView *)slideView:(YLSlideView *)slideView
          cellForRowAtIndex:(NSUInteger)index;
 
 /**
@@ -46,7 +46,7 @@
  *  @param cell
  *  @param index
  */
-- (void)slideViewInitiatedComplete:(YLSlideCell*)cell forIndex:(NSUInteger)index;
+- (void)slideViewInitiatedComplete:(YLSlideTableView*)slideTableView forIndex:(NSUInteger)index;
 @optional
 
 /**
@@ -54,7 +54,7 @@
  *
  *  @param index 页码
  */
-- (void)slideVisibleView:(YLSlideCell*)cell forIndex:(NSUInteger)index;
+- (void)slideVisibleView:(YLSlideTableView*)slideTableView forIndex:(NSUInteger)index;
 
 @end
 
@@ -98,7 +98,7 @@
  *
  *  @return 可重用的Cell
  */
-- (YLSlideCell*)dequeueReusableCell;
+- (YLSlideTableView*)dequeueReusableCell;
 
 @end
 

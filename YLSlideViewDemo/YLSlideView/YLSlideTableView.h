@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YLSlideCell : UITableView
+@interface YLSlideTableView : UITableView
 @property (nonatomic,assign)NSInteger index;
 @end

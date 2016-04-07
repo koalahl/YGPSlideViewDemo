@@ -2,7 +2,7 @@
 #import "ViewController.h"
 #import "YLSlideView/YLSlideView.h"
 #import "YLSlideConfig.h"
-#import "YLSlideView/YLSlideCell.h"
+#import "YLSlideView/YLSlideTableView.h"
 #import "YGPCache.h"
 #import "CustomTableViewCell.h"
 
@@ -54,40 +54,40 @@
     return titleArray.count;
 }
 
-- (YLSlideCell *)slideView:(YLSlideView *)slideView
+- (YLSlideTableView *)slideView:(YLSlideView *)slideView
          cellForRowAtIndex:(NSUInteger)index{
     
-    YLSlideCell * cell = [slideView dequeueReusableCell];
+    YLSlideTableView * slideTableView = [slideView dequeueReusableCell];
     
-    if (!cell) {
-        cell = [[YLSlideCell alloc]initWithFrame:CGRectMake(0, 0, 320, 500)
+    if (!slideTableView) {
+        slideTableView = [[YLSlideTableView alloc]initWithFrame:CGRectMake(0, 0, 320, 500)
                                            style:UITableViewStylePlain];
-        cell.delegate   = self;
-        cell.dataSource = self;
+        slideTableView.delegate   = self;
+        slideTableView.dataSource = self;
         
     }
-    [cell registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cell"];
+    [slideTableView registerNib:[UINib nibWithNibName:@"CustomTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"cell"];
     
     //    cell.backgroundColor = colors[index];
     
     
-    return cell;
+    return slideTableView;
 }
-- (void)slideVisibleView:(YLSlideCell *)cell forIndex:(NSUInteger)index{
+- (void)slideVisibleView:(YLSlideTableView *)slideTableView forIndex:(NSUInteger)index{
     
     NSLog(@"index :%@ ",@(index));
     
-    [cell reloadData]; //刷新TableView
+    [slideTableView reloadData]; //刷新TableView
     //    NSLog(@"刷新数据");
 }
 
-- (void)slideViewInitiatedComplete:(YLSlideCell *)cell forIndex:(NSUInteger)index{
+- (void)slideViewInitiatedComplete:(YLSlideTableView *)slideTableView forIndex:(NSUInteger)index{
     
     //可以在这里做数据的预加载（缓存数据）
     NSLog(@"缓存数据 %@",@(index));
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [cell reloadData];
+        [slideTableView reloadData];
         
     });
 }

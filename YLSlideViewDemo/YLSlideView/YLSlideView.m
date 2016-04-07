@@ -17,7 +17,7 @@
 //
 - (void)slideViewRecycle;
 - (BOOL)isVisibleCellForIndex:(NSUInteger)index;
-- (void)configCellWithCell:(YLSlideCell*)cell forIndex:(NSUInteger)index;
+- (void)configCellWithCell:(YLSlideTableView*)cell forIndex:(NSUInteger)index;
 //
 - (void)configSlideView;
 
@@ -71,7 +71,7 @@
     nextPage               = MIN(nextPage, _totaiPageNumber-1);
     
     //回收 unvisible cell
-    for (YLSlideCell * cell  in _visibleCells) {
+    for (YLSlideTableView * cell  in _visibleCells) {
         
         if (cell.index < currentPage || cell.index > nextPage) {
             
@@ -92,7 +92,7 @@
         
         if (![self isVisibleCellForIndex:index]) {
             
-            YLSlideCell *cell = [_delegate slideView:self cellForRowAtIndex:index];
+            YLSlideTableView *cell = [_delegate slideView:self cellForRowAtIndex:index];
             [self configCellWithCell:cell forIndex:index];
             
             [_visibleCells addObject:cell];
@@ -101,9 +101,9 @@
     }
 }
 
-- (YLSlideCell*)dequeueReusableCell{
+- (YLSlideTableView*)dequeueReusableCell{
     
-    YLSlideCell * cell = [_recycledCells anyObject];
+    YLSlideTableView * cell = [_recycledCells anyObject];
     
     if (cell) {
         [_recycledCells removeObject:cell];
@@ -116,7 +116,7 @@
     
     BOOL isVisibleCell = NO;
     
-    for (YLSlideCell * cell in _visibleCells) {
+    for (YLSlideTableView * cell in _visibleCells) {
         
         if (cell.index == index) {
             isVisibleCell = YES;
@@ -127,11 +127,11 @@
     return isVisibleCell;
 }
 
-- (YLSlideCell*)visibleCellForIndex:(NSUInteger)index{
+- (YLSlideTableView*)visibleCellForIndex:(NSUInteger)index{
     
-    YLSlideCell * visibleCell = nil;
+    YLSlideTableView * visibleCell = nil;
     
-    for (YLSlideCell * cell in _visibleCells) {
+    for (YLSlideTableView * cell in _visibleCells) {
         
         if (cell.index == index) {
             visibleCell = cell;
@@ -141,7 +141,7 @@
     return visibleCell;
 }
 
-- (void)configCellWithCell:(YLSlideCell*)cell forIndex:(NSUInteger)index{
+- (void)configCellWithCell:(YLSlideTableView*)cell forIndex:(NSUInteger)index{
     
     cell.index            = index;
     CGRect cellFrame      = self.bounds;
@@ -156,7 +156,7 @@
     }
     
     //获取偏移量
-    __block YLSlideCell *newCell = cell;
+    __block YLSlideTableView *newCell = cell;
     [[YGPCache sharedCache] dataForKey:[@(cell.index) stringValue] block:^(NSData *data, NSString *key) {
         
         if (data) {
