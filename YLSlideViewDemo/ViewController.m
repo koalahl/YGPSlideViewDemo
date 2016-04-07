@@ -49,7 +49,7 @@
     
     
 }
-
+#pragma mark - YLSlideViewDelegate
 - (NSInteger)columnNumber{
     return titleArray.count;
 }
